@@ -138,8 +138,11 @@ f = []
 
 #Conseguir todos os f por Euler
 for x in range(1, k+1):
-	resul = funct.subs([(y, y0), (t, t0)])
-	y_prox = y0 + (h* resul)
+	k1 = funct.subs([(y, y0), (t, t0)])
+	k2 = funct.subs([(y, y0 + 0.5*h*k1), (t, t0 + 0.5*h)])
+	k3 = funct.subs([(y, y0 + 0.5*h*k2), (t, t0 + 0.5*h)])
+	k4 = funct.subs([(y, y0 + h*k3), (t, t0+h)])
+	y_prox = y0 + (h/6)*(k1+ 2*k2 + 2*k3 + k4)
 	f.append(y_prox)
 	#print(f)
 	y0 = y_prox
