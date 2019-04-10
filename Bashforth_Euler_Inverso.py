@@ -8,7 +8,7 @@ def ordem2(t0, k, h, n, f, funct):
 	for x in range (0, k):
 		print(str(x)+'. '+str(f[x]))
 
-	for x in range(0, n+1):
+	for x in range(k, n+1):
 		resul = funct.subs([(y, f[0]), (t, t0)])
 		y_prox = f[0] + h*resul
 		f[0] = y_prox
@@ -19,10 +19,10 @@ def ordem3(t0, k, h, n, f, funct):
 	for x in range (0, k):
 		print(str(x)+'. '+str(f[x]))
 
-	for x in range(1, n+1):
+	for x in range(k, n+1):
 		resul = 3*funct.subs([(y, f[1]), (t, t0)])
 		resul2 = funct.subs([(y, f[0]), (t, t0 -h)])
-		y_prox = f[1] + (h/float(12))*(resul - resul2)
+		y_prox = f[1] + (h/float(2))*(resul - resul2)
 		f[0] = f[1]
 		f[1] = y_prox
 		print(y_prox)
@@ -32,11 +32,11 @@ def ordem4(t0, k, h, n, f, funct):
 	for x in range (0, k):
 		print(str(x)+'. '+str(f[x]))
 
-	for x in range(1, n+1):
-		resul = (23/12)*funct.subs([(y, f[2]), (t, t0)])
-		resul2 = (16/12)*funct.subs([(y, f[1]), (t, t0 - h)])
-		resul3 = (5/12)*funct.subs([(y, f[0]), (t, t0 - 2*h)])
-		y_prox = f[2] + h*(resul - resul2 + resul3)
+	for x in range(k, n+1):
+		resul = 23*funct.subs([(y, f[2]), (t, t0)])
+		resul2 = 16*funct.subs([(y, f[1]), (t, t0 - h)])
+		resul3 = 5*funct.subs([(y, f[0]), (t, t0 - 2*h)])
+		y_prox = f[2] + (h/float(12))*(resul - resul2 + resul3)
 		f[0] = f[1]
 		f[1] = f[2]
 		f[2] = y_prox
@@ -47,7 +47,7 @@ def ordem5(t0, k, h, n, f, funct):
 	for x in range (0, k):
 		print(str(x)+'. '+str(f[x]))
 
-	for x in range(1, n+1):
+	for x in range(k, n+1):
 		resul = 55*funct.subs([(y, f[3]), (t, t0)])
 		resul2 = 59*funct.subs([(y, f[2]), (t, t0-h)])
 		resul3 = 37*funct.subs([(y, f[1]), (t, t0 - 2*h)])
@@ -64,7 +64,7 @@ def ordem6(t0, k, h, n, f, funct):
 	for x in range (0, k):
 		print(str(x)+'. '+str(f[x]))
 
-	for x in range(k+1, n+1):
+	for x in range(k, n+1):
 		resul = (1901)*funct.subs([(y, f[4]), (t, t0)])
 		resul2 = (2774)*funct.subs([(y, f[3]), (t, t0 - h)])
 		resul3 = (2616)*funct.subs([(y, f[2]), (t, t0 - 2*h)])
@@ -83,14 +83,14 @@ def ordem7(t0, k, h, n, f, funct):
 	for x in range (0, k):
 		print(str(x)+'. '+str(f[x]))
 
-	for x in range(k+1, n+1):
+	for x in range(k, n+1):
 		resul = 4277*funct.subs([(y, f[5]), (t, t0)])
 		resul2 = 7923*funct.subs([(y, f[4]), (t, t0 - h)])
 		resul3 = 9982*funct.subs([(y, f[3]), (t, t0 - 2*h)])
 		resul4 = 7298*funct.subs([(y, f[2]), (t, t0 - 3*h)])
 		resul5 = 2877*funct.subs([(y, f[1]), (t, t0 - 4*h)])
 		resul6 = 760*funct.subs([(y, f[0]), (t, t0  - 5*h)])
-		y_prox = f[4] + (h/float(1440))*(resul - resul2 + resul3 - resul4 + resul5)
+		y_prox = f[5] + (h/float(1440))*(resul - resul2 + resul3 - resul4 + resul5 - resul6)
 		f[0] = f[1]
 		f[1] = f[2]
 		f[2] = f[3]
@@ -104,23 +104,25 @@ def ordem8(t0, k, h, n, f, funct):
 	for x in range (0, k):
 		print(str(x)+'. '+str(f[x]))
 
-	for x in range(k+1, n+1):
+	for x in range(k, n+1):
 		resul = 198721*funct.subs([(y, f[6]), (t, t0)])
-		resul = (18637*24)*funct.subs([(y, f[5]), (t, t0 - h)])
-		resul2 = (235183*3)*funct.subs([(y, f[4]), (t, t0 - 2*h)])
-		resul3 = (10754*64)*funct.subs([(y, f[3]), (t, t0 - 3*h)])
-		resul4 = (135713*3)*funct.subs([(y, f[2]), (t, t0 - 4*h)])
-		resul5 = (5603*24)*funct.subs([(y, f[1]), (t, t0 - 5*h)])
-		resul6 = 19087*funct.subs([(y, f[0]), (t, t0  - 6*h)])
-		y_prox = f[4] + (h/float(60480))*(resul - resul2 + resul3 - resul4 + resul5)
+		resul2 = (18637*24)*funct.subs([(y, f[5]), (t, t0 - h)])
+		resul3 = (235183*3)*funct.subs([(y, f[4]), (t, t0 - 2*h)])
+		resul4 = (10754*64)*funct.subs([(y, f[3]), (t, t0 - 3*h)])
+		resul5 = (135713*3)*funct.subs([(y, f[2]), (t, t0 - 4*h)])
+		resul6 = (5603*24)*funct.subs([(y, f[1]), (t, t0 - 5*h)])
+		resul7 = 19087*funct.subs([(y, f[0]), (t, t0  - 6*h)])
+		y_prox = f[4] + (h/float(60480))*(resul - resul2 + resul3 - resul4 + resul5 - resul6 + resul7)
 		f[0] = f[1]
 		f[1] = f[2]
 		f[2] = f[3]
 		f[3] = f[4]
 		f[4] = f[5]
-		f[5] = y_prox
+		f[5] = f[6]
+		f[6] = y_prox
 		print(str(x)+'. '+ str(y_prox))
 		t0 = t0 + h
+
 
 aux = entrada.split()
 
