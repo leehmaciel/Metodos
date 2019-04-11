@@ -47,7 +47,7 @@ class Bashforth:
 			f[1] = f[2]
 			f[2] = f[3]
 			f[3] = y_prox
-			print(str(x+1)+'. '+ str(y_prox))
+			print(str(x)+'. '+ str(y_prox))
 			t0 = t0 + h
 
 	def ordem5(self, t0, k, h, n, f, funct): #k=5
