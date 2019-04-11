@@ -4,7 +4,7 @@ class Multon_Euler_Inverso:
 	def __init__(self, info):
 		self.entrada = info
 
-	def ordem1(self, t0, k, h, n, f, funct): #k=2
+	def ordem2(self, t0, k, h, n, f, funct): #k=1
 		y_prox = symbols("y_prox")
 		y = symbols("y")
 		t = symbols("t")
@@ -18,7 +18,7 @@ class Multon_Euler_Inverso:
 			print(str(x)+'. '+ str(y_prox))
 			t0 = t0 + h
 
-	def ordem2(self, t0, k, h, n, f, funct): #k=3
+	def ordem3(self, t0, k, h, n, f, funct): #k=2
 		y_prox = symbols("y_prox")
 		y = symbols("y")
 		t = symbols("t")
@@ -34,7 +34,7 @@ class Multon_Euler_Inverso:
 			print(str(x)+'. '+ str(y_prox))
 			t0 = t0 + h
 
-	def ordem3(self, t0, k, h, n, f, funct): #k=4
+	def ordem4(self, t0, k, h, n, f, funct): #k=3
 		y_prox = symbols("y_prox")
 		y = symbols("y")
 		t = symbols("t")
@@ -52,7 +52,7 @@ class Multon_Euler_Inverso:
 			print(str(x)+'. '+ str(y_prox))
 			t0 = t0 + h
 
-	def ordem4(self, t0, k, h, n, f, funct): #k=5
+	def ordem5(self, t0, k, h, n, f, funct): #k=4
 		y_prox = symbols("y_prox")
 		y = symbols("y")
 		t = symbols("t")
@@ -72,7 +72,7 @@ class Multon_Euler_Inverso:
 			print(str(x)+'. '+ str(y_prox))
 			t0 = t0 + h
 
-	def ordem5(self, t0, k, h, n, f, funct):  #k=6
+	def ordem6(self, t0, k, h, n, f, funct):  #k=5
 		y_prox = symbols("y_prox")
 		y = symbols("y")
 		t = symbols("t")
@@ -80,9 +80,9 @@ class Multon_Euler_Inverso:
 		for x in range(k, n):
 			resul = (95./288.)*funct.subs([(y, f[5]), (t, t0)])
 			resul2 = (1427./1440.)*funct.subs([(y, f[4]), (t, t0 + h)])
-			resul3 = (-133./240.)*funct.subs([(y, f[3]), (t, t0 + 2.*h)])
+			resul3 = (133./240.)*funct.subs([(y, f[3]), (t, t0 + 2.*h)])
 			resul4 = (241./720.)*funct.subs([(y, f[2]), (t, t0 + 3.*h)])
-			resul5 = (-173./1440.)*funct.subs([(y, f[1]), (t, t0 + 4.*h)])
+			resul5 = (173./1440.)*funct.subs([(y, f[1]), (t, t0 + 4.*h)])
 			resul6 = (3./160.)*funct.subs([(y, f[0]), (t, t0 + 5.*h)])
 			y_prox = f[5] + h*(resul + resul2 - resul3 + resul4 - resul5 + resul6)
 			f[0] = f[1]
@@ -94,20 +94,21 @@ class Multon_Euler_Inverso:
 			print(str(x+1)+'. '+ str(y_prox))
 			t0 = t0 + h
 
-	def ordem6(self, t0, k, h, n, f, funct): #k=7
-		y_prox = symbols("y_prox")
+	def ordem7(self, t0, k, h, n, f, funct):  #k=6
+		#y_prox = symbols("y_prox")
 		y = symbols("y")
 		t = symbols("t")
 
 		for x in range(k, n):
 			resul = (19087./60480.)* funct.subs([(y, f[6]), (t, t0 + h)])
 			resul2 = (2713./2520.)*funct.subs([(y, f[5]), (t, t0)])
-			resul3 = (15487./20160.)*funct.subs([(y, f[4]), (t, t0 - h)])
+			resul3 = (-1)*(15487./20160.)*funct.subs([(y, f[4]), (t, t0 - h)])
 			resul4 = (586./945.)*funct.subs([(y, f[3]), (t, t0 - 2*h)])
-			resul5 = (6737./20160.)*funct.subs([(y, f[2]), (t, t0 - 3*h)])
+			resul5 = (-1)*(6737./20160.)*funct.subs([(y, f[2]), (t, t0 - 3*h)])
 			resul6 = (263./2520.)*funct.subs([(y, f[1]), (t, t0 - 4*h)])
-			resul7 = (863./60480.)*funct.subs([(y, f[0]), (t, t0  - 5*h)])
-			y_prox = f[6] + (h/float(60480))*(resul + resul2 - resul3 + resul4 - resul5 + resul6 - resul7)
+			resul7 = (-1)*(863./60480.)*funct.subs([(y, f[0]), (t, t0  - 5*h)])
+			teste = h*(resul + resul2 + resul3 + resul4 + resul5 + resul6 + resul7)
+			y_prox = f[6] + teste
 			f[0] = f[1]
 			f[1] = f[2]
 			f[2] = f[3]
@@ -129,40 +130,39 @@ class Multon_Euler_Inverso:
 		k = sympify(aux[6])
 		y = symbols("y")
 		t = symbols("t")
-		f = []
+		f = [0.0]
 
 		print("Metodo Multon by Euler Inverso")
 		print("y(" + str(t0) + ") = " + str(y0) )
 		print("h = "+ str(round(h,2)))
 
 		#Conseguir todos os f por Euler
-		for x in range(1, k+2):
+		for x in range(0, k):
 			y_prox = y0 + funct.subs([(y, y0), (t, t0)]) *h 
 			y_prox = y0 + funct.subs([(y, y_prox), (t, t0+h)]) * h
 			f.append(y_prox)
-			print(str(x+1)+'. '+str(f[x]))
+			print(str(x)+'. '+str(f[x]))
 			y0 = y_prox
 			t0 = t0 + h
 
 
-		if(k==2):
-			self.ordem1(t0, k, h, n, f, funct)
-
-		elif(k==3):
+		if(k==1):
 			self.ordem2(t0, k, h, n, f, funct)
 
-		elif(k==4):
-			#Quando a ordem for 3
+		elif(k==2):
 			self.ordem3(t0, k, h, n, f, funct)
 
-		elif(k==5):
+		elif(k==3):
 			self.ordem4(t0, k, h, n, f, funct)
 
-		elif(k==6):
+		elif(k==4):
 			self.ordem5(t0, k, h, n, f, funct)
 
-		elif(k==7):
+		elif(k==5):
 			self.ordem6(t0, k, h, n, f, funct)
 
-		elif(k>7):
+		elif(k==6):
+			self.ordem7(t0, k, h, n, f, funct)
+			
+		elif(k>=7):
 			print("Error")
