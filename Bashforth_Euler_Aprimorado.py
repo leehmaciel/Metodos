@@ -15,7 +15,7 @@ class Bashforth_Euler_Aprimorado:
 			y_prox = f[1] + h*(resul - resul2)
 			f[0] = f[1]
 			f[1] = y_prox
-			print(y_prox)
+			print(str(x)+'. '+ str(y_prox))
 			t0 = t0 + h
 
 	def ordem3(self, t0, k, h, n, f, funct): #k=3
@@ -30,7 +30,7 @@ class Bashforth_Euler_Aprimorado:
 			f[0] = f[1]
 			f[1] = f[2]
 			f[2] = y_prox
-			print(y_prox)
+			print(str(x)+'. '+ str(y_prox))
 			t0 = t0 + h
 
 	def ordem4(self, t0, k, h, n, f, funct): #k=4
